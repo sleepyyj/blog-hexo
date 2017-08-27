@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,244
+                  1,332
                 </span>
               
 
@@ -409,7 +409,8 @@
       
         
           
-            <h3 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h3><ul>
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记下常用的git命令，内容大多参考廖雪峰老师的git教程。加上自己工作中用到的一些命令。这里就不介绍工作区、暂存区、版本库和远程库的概念了。</p>
+<h3 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h3><ul>
 <li>初始化一个Git仓库，使用git init命令。 添加文件到Git仓库，分两步： <ul>
 <li>第一步，使用命令<code>git add &lt;file&gt;</code>，注意，可反复多次使用，添加多个文件； </li>
 <li>第二步，使用命令<code>git commit</code>，完成。</li>
@@ -443,8 +444,8 @@
 <h3 id="feature分支："><a href="#feature分支：" class="headerlink" title="feature分支："></a>feature分支：</h3><p>开发一个新feature，最好新建一个分支；<br>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
 <h3 id="多人合作："><a href="#多人合作：" class="headerlink" title="多人合作："></a>多人合作：</h3><p>多人协作的工作模式通常是这样：<br>首先，可以试图用<code>git push origin branch-name</code>推送自己的修改，如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并，如果合并有冲突，则解决冲突，并在本地提交，没有冲突或者解决掉冲突后，再用<code>git push origin branch-name</code>推送就能成功！<br>如果<code>git pull</code>提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name origin/branch-name</code>。这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
 <h3 id="标签："><a href="#标签：" class="headerlink" title="标签："></a>标签：</h3><p><code>git tag &lt;name&gt;</code>：用于新建一个标签，默认为HEAD，也可以指定一个commit id；<br><code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以指定标签信息；<br><code>git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以用PGP签名标签；<br><code>git tag</code>：可以查看所有标签。<br><code>git push origin &lt;tagname&gt;</code>：可以推送一个本地标签；<br><code>git push origin --tags</code>：可以推送全部未推送过的本地标签；<br><code>git tag -d &lt;tagname&gt;</code>：可以删除一个本地标签；<br><code>git push origin :refs/tags/&lt;tagname&gt;</code>：可以删除一个远程标签。</p>
-<h4 id="贴一份常用命令的别名"><a href="#贴一份常用命令的别名" class="headerlink" title="贴一份常用命令的别名"></a>贴一份常用命令的别名</h4><p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/gitalias.png" alt="git alias" title="git alias"></p>
-<h4 id="下次更新submodule相关的东西…"><a href="#下次更新submodule相关的东西…" class="headerlink" title="下次更新submodule相关的东西…"></a>下次更新submodule相关的东西…</h4>
+<h3 id="贴一份常用命令的别名"><a href="#贴一份常用命令的别名" class="headerlink" title="贴一份常用命令的别名"></a>贴一份常用命令的别名</h3><p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/gitalias.png" alt="git alias" title="git alias"></p>
+<h3 id="下次更新submodule相关"><a href="#下次更新submodule相关" class="headerlink" title="下次更新submodule相关"></a>下次更新submodule相关</h3><h3 id="下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）"><a href="#下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）" class="headerlink" title="下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）"></a>下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）</h3>
           
         
       
@@ -633,7 +634,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      1.2k
+      1.3k
     </span>
   
 </div>
