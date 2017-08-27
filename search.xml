@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Git入门（未完待续）]]></title>
+      <url>/2017/08/26/Git%E5%85%A5%E9%97%A8%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89/</url>
+      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记下常用的git命令，内容大多参考廖雪峰老师的git教程。加上自己工作中用到的一些命令。这里就不介绍工作区、暂存区、版本库和远程库的概念了。</p>
+<h3 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h3><ul>
+<li>初始化一个Git仓库，使用git init命令。 添加文件到Git仓库，分两步： <ul>
+<li>第一步，使用命令<code>git add &lt;file&gt;</code>，注意，可反复多次使用，添加多个文件； </li>
+<li>第二步，使用命令<code>git commit</code>，完成。</li>
+</ul>
+</li>
+<li>要随时掌握工作区的状态，使用<code>git status</code>命令。 </li>
+<li>如果<code>git status</code>告诉你有文件被修改过，用<code>git diff</code>可以查看修改内容。</li>
+</ul>
+<h3 id="版本回退："><a href="#版本回退：" class="headerlink" title="版本回退："></a>版本回退：</h3><ul>
+<li>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令<code>git reset --hard commit_id</code>。</li>
+<li>穿梭前，用<code>git log</code>可以查看提交历史，以便确定要回退到哪个版本。<br>要重返未来，用<code>git reflog</code>查看命令历史，以便确定要回到未来的哪个版本。</li>
+<li>每次修改，如果不add到暂存区，那就不会加入到commit中。<ul>
+<li>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- file</code>。</li>
+<li>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD file</code>，就回到了场景1，第二步按场景1操作。</li>
+<li>场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。</li>
+</ul>
+</li>
+<li>命令<code>git rm</code>用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失最近一次提交后你修改的内容。</li>
+</ul>
+<h3 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h3><ul>
+<li>要关联一个远程库，使用命<code>令git remote add origin git@server-name:path/repo-name.git</code>；</li>
+<li>关联后，使用命令<code>git push -u origin master第一次推送master分支的所有内容</code>；</li>
+<li>此后，每次本地提交后，只要有必要，就可以使用命令<code>git push origin master</code>推送最新修改；</li>
+<li>要克隆一个仓库，首先必须知道仓库的地址，然后使用<code>git clone</code>命令克隆。<br>Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。</li>
+</ul>
+<h3 id="创建与合并分支："><a href="#创建与合并分支：" class="headerlink" title="创建与合并分支："></a>创建与合并分支：</h3><p>Git鼓励大量使用分支：<br>查看分支：<code>git branch</code><br>创建分支：<code>git branch &lt;name&gt;</code><br>切换分支：<code>git checkout &lt;name&gt;</code><br>创建+切换分支：<code>git checkout -b &lt;name&gt;</code><br>合并某分支到当前分支：<code>git merge &lt;name&gt;</code><br>删除分支：<code>git branch -d &lt;name&gt;</code><br>当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。<br>用<code>git log --grap</code>h命令可以看到分支合并图。<br>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
+<h3 id="bug分支："><a href="#bug分支：" class="headerlink" title="bug分支："></a>bug分支：</h3><ul>
+<li>当手头工作没有完成时，先把工作现场<code>git stash</code>一下，然后去修复bug，修复后，再<code>git stash pop</code>，回到工作现场。</li>
+<li>用<code>git stash list</code>命令看看，工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：<br>一是用<code>git stash apply</code>恢复，但是恢复后，stash内容并不删除，你需要用<code>git stash drop</code>来删除；<br>另一种方式是用<code>git stash pop</code>，恢复的同时把stash内容也删了：</li>
+</ul>
+<h3 id="feature分支："><a href="#feature分支：" class="headerlink" title="feature分支："></a>feature分支：</h3><p>开发一个新feature，最好新建一个分支；<br>如果要丢弃一个没有被合并过的分支，可以通过<code>git branch -D &lt;name&gt;</code>强行删除。</p>
+<h3 id="多人合作："><a href="#多人合作：" class="headerlink" title="多人合作："></a>多人合作：</h3><p>多人协作的工作模式通常是这样：<br>首先，可以试图用<code>git push origin branch-name</code>推送自己的修改，如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并，如果合并有冲突，则解决冲突，并在本地提交，没有冲突或者解决掉冲突后，再用<code>git push origin branch-name</code>推送就能成功！<br>如果<code>git pull</code>提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name origin/branch-name</code>。这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
+<h3 id="标签："><a href="#标签：" class="headerlink" title="标签："></a>标签：</h3><p><code>git tag &lt;name&gt;</code>：用于新建一个标签，默认为HEAD，也可以指定一个commit id；<br><code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以指定标签信息；<br><code>git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以用PGP签名标签；<br><code>git tag</code>：可以查看所有标签。<br><code>git push origin &lt;tagname&gt;</code>：可以推送一个本地标签；<br><code>git push origin --tags</code>：可以推送全部未推送过的本地标签；<br><code>git tag -d &lt;tagname&gt;</code>：可以删除一个本地标签；<br><code>git push origin :refs/tags/&lt;tagname&gt;</code>：可以删除一个远程标签。</p>
+<h3 id="贴一份常用命令的别名"><a href="#贴一份常用命令的别名" class="headerlink" title="贴一份常用命令的别名"></a>贴一份常用命令的别名</h3><p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/gitalias.png" alt="git alias" title="git alias"></p>
+<h3 id="下次更新submodule相关"><a href="#下次更新submodule相关" class="headerlink" title="下次更新submodule相关"></a>下次更新submodule相关</h3><h3 id="下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）"><a href="#下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）" class="headerlink" title="下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）"></a>下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）</h3>]]></content>
+      
+        <categories>
+            
+            <category> code </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
