@@ -47,7 +47,7 @@
 <li>特别注意：如果没有在子模块中push，而在上层模块push的话，在上层模块<code>git status</code>显示的是 modify content而不是new commits。这种情况下，其他人<code>git submodule update</code>的时候会报错，提示找不到那个子模块的commit id，那是肯定的，因为你并没有在子模块中push。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/nocommitid.png" alt="no commit id" title="no commit id"></p>
-<h3 id="git-merge和git-rebase的区别"><a href="#git-merge和git-rebase的区别" class="headerlink" title="git merge和git rebase的区别"></a>git merge和git rebase的区别</h3><p>这篇文章总结的不错，懒得写了。。。我们公司一般用rebase，这样的话树看起来会比较干净。<br><a href="http://blog.csdn.net/wh_19910525/article/details/7554489" target="_blank" rel="external">http://blog.csdn.net/wh_19910525/article/details/7554489</a></p>
+<h3 id="git-merge和git-rebase的区别"><a href="#git-merge和git-rebase的区别" class="headerlink" title="git merge和git rebase的区别"></a>git merge和git rebase的区别</h3><p>这篇文章总结的不错，懒得写了。。。我们公司一般用rebase，rebase让树看起来比较干净。<br><a href="http://blog.csdn.net/wh_19910525/article/details/7554489" target="_blank" rel="external">http://blog.csdn.net/wh_19910525/article/details/7554489</a></p>
 ]]></content>
       
         <categories>
