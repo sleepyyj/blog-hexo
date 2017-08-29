@@ -41,13 +41,14 @@
 <h3 id="多人合作"><a href="#多人合作" class="headerlink" title="多人合作"></a>多人合作</h3><p>多人协作的工作模式通常是这样：<br>首先，可以试图用<code>git push origin branch-name</code>推送自己的修改，如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并，如果合并有冲突，则解决冲突，并在本地提交，没有冲突或者解决掉冲突后，再用<code>git push origin branch-name</code>推送就能成功！<br>如果<code>git pull</code>提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name origin/branch-name</code>。这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
 <h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p><code>git tag &lt;name&gt;</code>：用于新建一个标签，默认为HEAD，也可以指定一个commit id；<br><code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以指定标签信息；<br><code>git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以用PGP签名标签；<br><code>git tag</code>：可以查看所有标签。<br><code>git push origin &lt;tagname&gt;</code>：可以推送一个本地标签；<br><code>git push origin --tags</code>：可以推送全部未推送过的本地标签；<br><code>git tag -d &lt;tagname&gt;</code>：可以删除一个本地标签；<br><code>git push origin :refs/tags/&lt;tagname&gt;</code>：可以删除一个远程标签。</p>
 <h3 id="贴一份常用命令的别名"><a href="#贴一份常用命令的别名" class="headerlink" title="贴一份常用命令的别名"></a>贴一份常用命令的别名</h3><p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/gitalias.png" alt="git alias" title="git alias"></p>
-<h3 id="submodule"><a href="#submodule" class="headerlink" title="submodule"></a>submodule</h3><ul>
+<h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><ul>
 <li>项目中可能会用到一些通用的模块，可以提取出来作为一个单独的project被多个项目公用。使用<code>git submodule add</code>将一个外部项目添加为子模块。如果想从远程库拉一个带子模块的项目，clone之后会发现子模块的目录是空的。这时候先运行<code>git submodule init</code>初始化本地的配置文件，<code>git submodule update</code>拉取子模块的数据到本地。</li>
 <li>需要注意的是，每次在子模块中add、commmit、push后回到上层模块，<code>git status</code>看一下会发现子模块有new commits，这时要在层模块再来一套add、commit、push，否则多人协作时，他人无法知道你修改了子模块。同理，其他人需要同步你提交的代码，在pull完之后运行<code>git submodule update</code>即可。</li>
 <li>特别注意：如果没有在子模块中push，而在上层模块push的话，在上层模块<code>git status</code>显示的是 modify content而不是new commits。这种情况下，其他人<code>git submodule update</code>的时候会报错，提示找不到那个子模块的commit id，那是肯定的，因为你并没有在子模块中push。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/nocommitid.png" alt="no commit id" title="no commit id"></p>
-<h3 id="下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）"><a href="#下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）" class="headerlink" title="下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）"></a>下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）</h3>]]></content>
+<h3 id="git-merge和git-rebase的区别"><a href="#git-merge和git-rebase的区别" class="headerlink" title="git merge和git rebase的区别"></a>git merge和git rebase的区别</h3><p>这篇文章总结的不错，懒得写了。。。我们公司一般用rebase，这样的话树看起来会比较干净。<br><a href="http://blog.csdn.net/wh_19910525/article/details/7554489" target="_blank" rel="external">http://blog.csdn.net/wh_19910525/article/details/7554489</a></p>
+]]></content>
       
         <categories>
             

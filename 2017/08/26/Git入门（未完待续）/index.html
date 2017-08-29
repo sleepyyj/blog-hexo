@@ -105,7 +105,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/gitalias.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/nocommitid.png">
-<meta property="og:updated_time" content="2017-08-29T07:46:10.123Z">
+<meta property="og:updated_time" content="2017-08-29T09:51:57.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git入门（未完待续）">
 <meta name="twitter:description" content="前言记下常用的git命令，内容大多参考廖雪峰老师的git教程。加上自己工作中用到的一些命令。这里就不介绍工作区、暂存区、版本库和远程库的概念了。 初始化： 初始化一个Git仓库，使用git init命令。 添加文件到Git仓库，分两步：  第一步，使用命令git add &amp;lt;file&amp;gt;，注意，可反复多次使用，添加多个文件；  第二步，使用命令git commit，完成。   要随时掌握工">
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,628
+                  1,650
                 </span>
               
 
@@ -493,13 +493,14 @@
 <h3 id="多人合作"><a href="#多人合作" class="headerlink" title="多人合作"></a>多人合作</h3><p>多人协作的工作模式通常是这样：<br>首先，可以试图用<code>git push origin branch-name</code>推送自己的修改，如果推送失败，则因为远程分支比你的本地更新，需要先用<code>git pull</code>试图合并，如果合并有冲突，则解决冲突，并在本地提交，没有冲突或者解决掉冲突后，再用<code>git push origin branch-name</code>推送就能成功！<br>如果<code>git pull</code>提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name origin/branch-name</code>。这就是多人协作的工作模式，一旦熟悉了，就非常简单。</p>
 <h3 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h3><p><code>git tag &lt;name&gt;</code>：用于新建一个标签，默认为HEAD，也可以指定一个commit id；<br><code>git tag -a &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以指定标签信息；<br><code>git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;</code>：可以用PGP签名标签；<br><code>git tag</code>：可以查看所有标签。<br><code>git push origin &lt;tagname&gt;</code>：可以推送一个本地标签；<br><code>git push origin --tags</code>：可以推送全部未推送过的本地标签；<br><code>git tag -d &lt;tagname&gt;</code>：可以删除一个本地标签；<br><code>git push origin :refs/tags/&lt;tagname&gt;</code>：可以删除一个远程标签。</p>
 <h3 id="贴一份常用命令的别名"><a href="#贴一份常用命令的别名" class="headerlink" title="贴一份常用命令的别名"></a>贴一份常用命令的别名</h3><p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/gitalias.png" alt="git alias" title="git alias"></p>
-<h3 id="submodule"><a href="#submodule" class="headerlink" title="submodule"></a>submodule</h3><ul>
+<h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><ul>
 <li>项目中可能会用到一些通用的模块，可以提取出来作为一个单独的project被多个项目公用。使用<code>git submodule add</code>将一个外部项目添加为子模块。如果想从远程库拉一个带子模块的项目，clone之后会发现子模块的目录是空的。这时候先运行<code>git submodule init</code>初始化本地的配置文件，<code>git submodule update</code>拉取子模块的数据到本地。</li>
 <li>需要注意的是，每次在子模块中add、commmit、push后回到上层模块，<code>git status</code>看一下会发现子模块有new commits，这时要在层模块再来一套add、commit、push，否则多人协作时，他人无法知道你修改了子模块。同理，其他人需要同步你提交的代码，在pull完之后运行<code>git submodule update</code>即可。</li>
 <li>特别注意：如果没有在子模块中push，而在上层模块push的话，在上层模块<code>git status</code>显示的是 modify content而不是new commits。这种情况下，其他人<code>git submodule update</code>的时候会报错，提示找不到那个子模块的commit id，那是肯定的，因为你并没有在子模块中push。</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/nocommitid.png" alt="no commit id" title="no commit id"></p>
-<h3 id="下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）"><a href="#下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）" class="headerlink" title="下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）"></a>下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）</h3>
+<h3 id="git-merge和git-rebase的区别"><a href="#git-merge和git-rebase的区别" class="headerlink" title="git merge和git rebase的区别"></a>git merge和git rebase的区别</h3><p>这篇文章总结的不错，懒得写了。。。我们公司一般用rebase，这样的话树看起来会比较干净。<br><a href="http://blog.csdn.net/wh_19910525/article/details/7554489" target="_blank" rel="external">http://blog.csdn.net/wh_19910525/article/details/7554489</a></p>
+
       
     </div>
     
@@ -702,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化："><span class="nav-number">1.1.</span> <span class="nav-text">初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本回退"><span class="nav-number">1.2.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程仓库"><span class="nav-number">1.3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建与合并分支"><span class="nav-number">1.4.</span> <span class="nav-text">创建与合并分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bug分支"><span class="nav-number">1.5.</span> <span class="nav-text">bug分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feature分支"><span class="nav-number">1.6.</span> <span class="nav-text">feature分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人合作"><span class="nav-number">1.7.</span> <span class="nav-text">多人合作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签"><span class="nav-number">1.8.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贴一份常用命令的别名"><span class="nav-number">1.9.</span> <span class="nav-text">贴一份常用命令的别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#submodule"><span class="nav-number">1.10.</span> <span class="nav-text">submodule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下下次更新-git-merge-和-git-rebase-的区别（刚开始用git的时候疯狂merge被骂了好几次…）"><span class="nav-number">1.11.</span> <span class="nav-text">下下次更新 git merge 和 git rebase 的区别（刚开始用git的时候疯狂merge被骂了好几次…）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化："><span class="nav-number">1.1.</span> <span class="nav-text">初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本回退"><span class="nav-number">1.2.</span> <span class="nav-text">版本回退</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程仓库"><span class="nav-number">1.3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建与合并分支"><span class="nav-number">1.4.</span> <span class="nav-text">创建与合并分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bug分支"><span class="nav-number">1.5.</span> <span class="nav-text">bug分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#feature分支"><span class="nav-number">1.6.</span> <span class="nav-text">feature分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多人合作"><span class="nav-number">1.7.</span> <span class="nav-text">多人合作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标签"><span class="nav-number">1.8.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贴一份常用命令的别名"><span class="nav-number">1.9.</span> <span class="nav-text">贴一份常用命令的别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子模块"><span class="nav-number">1.10.</span> <span class="nav-text">子模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-merge和git-rebase的区别"><span class="nav-number">1.11.</span> <span class="nav-text">git merge和git rebase的区别</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -740,7 +741,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      1.6k
+      1.7k
     </span>
   
 </div>
