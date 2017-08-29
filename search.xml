@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[Git：世界上最好的版本控制工具]]></title>
       <url>/2017/08/26/Git%E5%85%A5%E9%97%A8%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记下常用的git命令，内容大多参考廖雪峰老师的git教程。加上自己工作中用到的一些命令。这里就不介绍工作区、暂存区、版本库和远程库的概念了。</p>
+      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>去年用的是SVN，换了家公司用了git，没有对比就没有伤害，不得不承认git是世界上最好的版本控制工具。本文记下常用的git命令，内容大多参考廖雪峰老师的git教程。加上自己工作中用到的一些命令。这里就不介绍工作区、暂存区、版本库和远程库的概念了。</p>
 <h3 id="初始化："><a href="#初始化：" class="headerlink" title="初始化："></a>初始化：</h3><ul>
 <li>初始化一个Git仓库，使用git init命令。 添加文件到Git仓库，分两步： <ul>
 <li>第一步，使用命令<code>git add &lt;file&gt;</code>，注意，可反复多次使用，添加多个文件； </li>
