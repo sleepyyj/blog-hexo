@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="webpack," />
 
 
 
@@ -95,17 +95,18 @@
 
 
 
-<meta name="description" content="404">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Flandre">
-<meta property="og:url" content="https://sleepyyj.github.io/404.html">
+<meta name="description" content="前言前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。 babel-loader配置babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack之babel-loader配置">
+<meta property="og:url" content="https://sleepyyj.github.io/2017/09/07/webpack之babel-loader配置/index.html">
 <meta property="og:site_name" content="Flandre">
-<meta property="og:description" content="404">
+<meta property="og:description" content="前言前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。 babel-loader配置babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-26T02:50:31.577Z">
+<meta property="og:updated_time" content="2017-09-07T12:59:09.067Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flandre">
-<meta name="twitter:description" content="404">
+<meta name="twitter:title" content="webpack之babel-loader配置">
+<meta name="twitter:description" content="前言前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。 babel-loader配置babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，">
 
 
 
@@ -135,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://sleepyyj.github.io/404.html"/>
+  <link rel="canonical" href="https://sleepyyj.github.io/2017/09/07/webpack之babel-loader配置/"/>
 
 
 
 
 
-  <title> | Flandre</title>
+  <title>webpack之babel-loader配置 | Flandre</title>
   
 
 
@@ -310,41 +311,257 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/09/07/webpack之babel-loader配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yangjian">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flandre">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline"></h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <!DOCTYPE html>
-<html>
-<head>
-	<title>404</title>
-</head>
-<body>
-<script type="text/javascript" src="//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" charset="utf-8"></script>
-</body>
-</html>
+          <h1 class="post-title" itemprop="name headline">webpack之babel-loader配置</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T20:16:45+08:00">
+                2017-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/07/webpack之babel-loader配置/" class="leancloud_visitors" data-flag-title="webpack之babel-loader配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  968
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。</p>
+<h3 id="babel-loader配置"><a href="#babel-loader配置" class="headerlink" title="babel-loader配置"></a>babel-loader配置</h3><p>babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，所以如果你想使用es6的一颗赛艇的新特性，babel是必要的。贴段代码吧</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;</div><div class="line">        test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx</div><div class="line">        exclude: /(node_modules|bower_components)/,</div><div class="line">        loader: 'babel', </div><div class="line">        query: &#123;</div><div class="line">            "presets": [</div><div class="line">        "react",</div><div class="line">        "es2015",</div><div class="line">        "stage-1"</div><div class="line">        ],</div><div class="line">            "plugins": ["transform-decorators-legacy"]</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>test：是一个用来匹配jsx的正则表达式<br>exclude：不列入查找范围的文件夹<br>loader：The module to load. “babel” is short for “babel-loader”<br>query：需要转换的范围，也可以写在loader选项babel的后面，如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;</div><div class="line">		test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx</div><div class="line">		exclude: /(node_modules|bower_components)/,</div><div class="line">		loader: 'babel?presets[]=es2015&amp;presets[]=react&amp;presets[]=stage-1', </div><div class="line">		query: &#123;</div><div class="line">      		"plugins": ["transform-decorators-legacy"] //这个插件下面会讲到</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>敲黑板。下面重点讲一下stage</p>
+<h3 id="stage-0"><a href="#stage-0" class="headerlink" title="stage-0"></a>stage-0</h3><p>stage-0包含stage-1, stage-2以及stage-3的所有功能，同时还另外支持如下两个功能插件：</p>
+<ul>
+<li>transform-do-expressions 这个插件就是为了方便在 jsx写if/else表达式而提出的，我们可以在return中写if/else，虽然很牛逼，但是好像没啥意义，写render里就行了嘛…</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> App = React.createClass(&#123;</div><div class="line">    render()&#123;</div><div class="line">        <span class="keyword">let</span> &#123; color &#125; = <span class="keyword">this</span>.props;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;div className=<span class="string">"parents"</span>&gt;</div><div class="line">                &#123;<span class="keyword">do</span> &#123;</div><div class="line">                    <span class="keyword">if</span>(color == <span class="string">'blue'</span>) &#123; </div><div class="line">                        &lt;BlueComponent/&gt; </div><div class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(color == <span class="string">'red'</span>) &#123; </div><div class="line">                        &lt;RedComponent/&gt; </div><div class="line">                    &#125;<span class="keyword">else</span> &#123; </div><div class="line">                        &lt;GreenComponent/&gt; &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;&#125;</div><div class="line">            &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">        )</span></div><div class="line"><span class="regexp">    &#125;</span></div><div class="line"><span class="regexp">&#125;)</span></div></pre></td></tr></table></figure>
+<ul>
+<li>transform-function-bind 这个插件其实就是提供过 :: 这个操作符来方便快速切换上下文，看代码吧，这个我也没看懂</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">obj::func</div><div class="line"><span class="comment">// is equivalent to:</span></div><div class="line">func.bind(obj)</div><div class="line"></div><div class="line">obj::func(val)</div><div class="line"><span class="comment">// is equivalent to:</span></div><div class="line">func.call(obj, val)</div><div class="line"></div><div class="line">::obj.func(val)</div><div class="line"><span class="comment">// is equivalent to:</span></div><div class="line">func.call(obj, val)</div><div class="line"></div><div class="line"><span class="comment">// 再来一个复杂点的样例</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> box = &#123;</div><div class="line">  weight: <span class="number">2</span>,</div><div class="line">  getWeight() &#123; <span class="keyword">return</span> <span class="keyword">this</span>.weight; &#125;,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">const</span> &#123; getWeight &#125; = box;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(box.getWeight()); <span class="comment">// prints '2'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> bigBox = &#123; <span class="attr">weight</span>: <span class="number">10</span> &#125;;</div><div class="line"><span class="built_in">console</span>.log(bigBox::getWeight()); <span class="comment">// prints '10'</span></div><div class="line"></div><div class="line"><span class="comment">// Can be chained:</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">val</span>) </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span> + val; &#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(bigBox::getWeight()::add(<span class="number">5</span>)); <span class="comment">// prints '15'</span></div></pre></td></tr></table></figure>
+<h3 id="stage-1"><a href="#stage-1" class="headerlink" title="stage-1"></a>stage-1</h3><p>stage-1除了包含stage-2和stage-3，还包含了下面2个插件：﻿</p>
+<ul>
+<li>transform-class-properties 官方文档中这个插件已经被废弃</li>
+<li>transform-export-extensions 对不起，我也不知道这个是干嘛的，官方文档也没有解释…</li>
+</ul>
+<h3 id="stage-2"><a href="#stage-2" class="headerlink" title="stage-2"></a>stage-2</h3><p>它除了覆盖stage-3的所有功能，还支持如下两个插件：</p>
+<ul>
+<li>syntax-trailing-function-commas 尾逗号函数，这个就不贴代码了，就是在数组或对象的最后一个元素的后面加逗号不会报错，很实用</li>
+<li>transform-object-reset-spread 其实它是对 ES6中解构赋值的一个扩展，因为ES6只支持对数组的解构赋值，对对象是不支持的。如下面的代码所示：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取剩下的属性</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> &#123; x, y, ...z &#125; = &#123; <span class="attr">x</span>: <span class="number">1</span>, <span class="attr">y</span>: <span class="number">2</span>, <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">4</span> &#125;;</div><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 1</span></div><div class="line"><span class="built_in">console</span>.log(y); <span class="comment">// 2</span></div><div class="line"><span class="built_in">console</span>.log(z); <span class="comment">// &#123; a: 3, b: 4 &#125;</span></div><div class="line"></div><div class="line"><span class="comment">// 属性展开</span></div><div class="line"><span class="keyword">let</span> n = &#123; x, y, ...z &#125;;</div><div class="line"><span class="built_in">console</span>.log(n); <span class="comment">// &#123; x: 1, y: 2, a: 3, b: 4 &#125;</span></div></pre></td></tr></table></figure>
+<h3 id="stage-3"><a href="#stage-3" class="headerlink" title="stage-3"></a>stage-3</h3><p>它支持大名鼎鼎的async和await, 这两个哥们可是解决(Ajax)回调函数的终极解决方法呀！管你什么异步，我都可以用同步的思维来写，ES7里面非常强悍的存在。总的来说，它包含如下两个插件:</p>
+<ul>
+<li>transform-async-to-generator 主要用来支持ES7中的async和await</li>
+<li>transform-exponentiation-operator<br>transform-exponentiation-operator这个插件算是一个语法糖，可以通过**这个符号来进行幂操作，想当于Math.pow(a,b)。如下面的样例</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// x ** y</span></div><div class="line"><span class="keyword">let</span> squared = <span class="number">2</span> ** <span class="number">2</span>;</div><div class="line"><span class="comment">// 相当于: 2 * 2</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> cubed = <span class="number">2</span> ** <span class="number">3</span>;</div><div class="line"><span class="comment">// 相当于: 2 * 2 * 2</span></div><div class="line"></div><div class="line"><span class="comment">// x **= y</span></div><div class="line"><span class="keyword">let</span> a = <span class="number">2</span>;</div><div class="line">a **= <span class="number">2</span>;</div><div class="line"><span class="comment">// 相当于: a = a * a;</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> b = <span class="number">3</span>;</div><div class="line">b **= <span class="number">3</span>;</div><div class="line"><span class="comment">// 相当于: b = b * b * b;</span></div></pre></td></tr></table></figure>
+<p>如果分不清stage-0、stage-1、stage-2、stage-3区别，请写上stage-0，就能嗨起来了…放心的使用es6和es7的新特性。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Yangjian
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sleepyyj.github.io/2017/09/07/webpack之babel-loader配置/" title="webpack之babel-loader配置">https://sleepyyj.github.io/2017/09/07/webpack之babel-loader配置/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/29/JS实现全屏的一些坑/" rel="next" title="JS实现全屏的一些坑">
+                <i class="fa fa-chevron-left"></i> JS实现全屏的一些坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -377,8 +594,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/dog.jpg"
@@ -469,6 +695,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#babel-loader配置"><span class="nav-number">1.1.</span> <span class="nav-text">babel-loader配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stage-0"><span class="nav-number">1.2.</span> <span class="nav-text">stage-0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stage-1"><span class="nav-number">1.3.</span> <span class="nav-text">stage-1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stage-2"><span class="nav-number">1.4.</span> <span class="nav-text">stage-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stage-3"><span class="nav-number">1.5.</span> <span class="nav-text">stage-3</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -622,10 +864,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
