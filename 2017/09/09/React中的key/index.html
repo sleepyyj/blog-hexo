@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React,JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在Re">
+<meta name="keywords" content="React,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React中的key">
+<meta property="og:url" content="https://sleepyyj.github.io/2017/09/09/React中的key/index.html">
+<meta property="og:site_name" content="hey yo this is Flandre&#39;s blog">
+<meta property="og:description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在Re">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png">
+<meta property="og:updated_time" content="2017-09-09T03:26:58.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React中的key">
+<meta name="twitter:description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在Re">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sleepyyj.github.io/2017/09/09/React中的key/"/>
+
+
+
+
+
+  <title>React中的key | hey yo this is Flandre's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hey yo this is Flandre's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/09/09/React中的key/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Flandre">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hey yo this is Flandre's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React中的key</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T11:01:56+08:00">
+                2017-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/09/React中的key/" class="leancloud_visitors" data-flag-title="React中的key">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,484
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。</p>
+<p>大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:</p>
+<p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png" alt="warning" title="warning"></p>
+<p>所以我们需要了解一下key值在React中起到了什么作用，在这之前我们先出一个小题目: 　　</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;ul&gt;</div><div class="line">            &#123;</div><div class="line">                [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>].map(<span class="function">(<span class="params">val</span>)=&gt;</span>&lt;li key=&#123;val&#125;&gt;&#123;val&#125;&lt;/li&gt;)</div><div class="line">            &#125;</div><div class="line">        &lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">ReactDOM.render(&lt;App/</span>&gt;,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
+<p>现在要提问了，上面的例子显示的是: 1,1,2,2还是1,2呢。事实上显示的只有1和2，所以我们不禁要问为什么?</p>
+<h3 id="一致性处理-Reconciliation"><a href="#一致性处理-Reconciliation" class="headerlink" title="一致性处理(Reconciliation)　　"></a>一致性处理(Reconciliation)　　</h3><p>我们知道每当组件的props和state发送改变时，React都会调用render去重新渲染UI，实质上render函数作用就是返回最新的元素树。这里我们要明确一个点: 什么是组件？什么是元素?<br>　　<br>React元素是用来描述UI对象的，JSX的实质就是<code>React.createElement</code>的语法糖，作用就是生成React元素。而React组件是一个方法或者类(Class)，其目的就是接受输入并返回一个ReactElement，当然调用React组件一般采用的也是通过JSX的方法，其本质也是通过React.createElement方式去调用组件的。<br>　　<br>我们之前说过，组件<code>state</code>和<code>props</code>的改变会引起render函数的调用，而render函数会返回新的元素树。我们知道React使得我们并不需要关心更改的内容，只需要将精力集中于数据的变化，React会负责前后UI更新。这时候React就面临一个问题，如果对比当前的元素树与之前的元素树，从而找到最优的方法(或者说是步骤最少的方法)将一颗树转化成另一棵树，从而去更新真实的DOM元素。目前存在大量的方法可以将一棵树转化成另一棵树，但它们的时间复杂度基本都是O(n3),这么庞大的时间数量级我们是不能接受的，试想如果我们的组件返回的元素树中含有100个元素，那么一次一致性比较就要达到1000000的数量级，这显然是低效的，不可接受的。这时React就采用了启发式的算法。 　　</p>
+<h3 id="启发式算法"><a href="#启发式算法" class="headerlink" title="启发式算法"></a>启发式算法</h3><p>了解一下什么是启发式算法：</p>
+<blockquote>
+<p>启发式算法指人在解决问题时所采取的一种根据经验规则进行发现的方法。其特点是在解决问题时,利用过去的经验,选择已经行之有效的方法，而不是系统地、以确定的步骤去寻求答案。</p>
+</blockquote>
+<p>React启发式算法就是采用一系列前提和假设，使得比较前后元素树的时间复杂度由O(n3)降低为O(n)，React启发式算法的前提条件主要包括两点:</p>
+<p>1.不同的两个元素会产生不同的树<br>2.可以使用key属性来表明不同的渲染中哪些元素是相同的</p>
+<h3 id="元素类型的比较"><a href="#元素类型的比较" class="headerlink" title="元素类型的比较"></a>元素类型的比较</h3><p>函数<code>React.createElement</code>的第一个参数就是type，表示的就是元素的类型。React比较两棵元素树的过程是同步的，当React比较到元素树中同一位置的元素节点时，如果前后元素的类型不同时,不论该元素是组件类型还是DOM类型的，那么以这个节点(React元素)为子树的所有节点都会被销毁并重新构建。举个例子: 　　</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//old tree</div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line">//new tree</div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上面表示前后两个render函数返回的元素树，由于<code>Counter</code>元素的父元素由<code>div</code>变成了<code>span</code>，那么那就导致<code>Counter</code>的卸载<code>(unmount)</code>和重新安装<code>(mount)</code>。这看起来没有什么问题，但是在某些情况下问题就会凸显出来，比如状态的丢失。下面我们再看一个例子: 　　</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line">    state = &#123;</div><div class="line">        value: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">    componentWillMount()&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'componentWillMount'</span>);</div><div class="line">    &#125;</div><div class="line">    componentDidMount()&#123;</div><div class="line">        <span class="keyword">this</span>.timer = setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">            <span class="keyword">this</span>.setState(&#123;</div><div class="line">                value: <span class="keyword">this</span>.state.value + <span class="number">1</span></div><div class="line">            &#125;)</div><div class="line">        &#125;,<span class="number">1000</span>)</div><div class="line">    &#125;</div><div class="line">    componentWillUnmount()&#123;</div><div class="line">        clearInterval(<span class="keyword">this</span>.timer);</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'componentWillUnmount'</span>);</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;div&gt;&#123;<span class="keyword">this</span>.state.value&#125;&lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">        )</span></div><div class="line"><span class="regexp">    &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">function Demo(props) &#123;</span></div><div class="line"><span class="regexp">    return props.flag ? (&lt;div&gt;&lt;Counter/</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>) : (<span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">Counter</span>/&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(props)&#123;</div><div class="line">        <span class="keyword">super</span>(props);</div><div class="line">    &#125;</div><div class="line">    state = &#123;</div><div class="line">        flag: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;Demo flag = &#123;<span class="keyword">this</span>.state.flag&#125;/&gt;</div><div class="line">                &lt;button</div><div class="line">                    onClick=&#123;()=&gt;&#123;</div><div class="line">                        <span class="keyword">this</span>.setState(&#123;</div><div class="line">                            flag: !<span class="keyword">this</span>.state.flag</div><div class="line">                        &#125;)</div><div class="line">                    &#125;&#125;</div><div class="line">                &gt;</div><div class="line">                Click</div><div class="line">                &lt;<span class="regexp">/button&gt;</span></div><div class="line"><span class="regexp">            &lt;/</span>div&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
+<p>上面的例子中，我们首先让计数器<code>Counter</code>运行几秒钟，然后我们点击按钮的话，我们会发现计数器的值会归零为0，并且<code>Counter</code>分别调用<code>componentWillUnmount</code>与<code>componentWillMount</code>并完成组件卸载与安装的过程。需要注意的是，状态<code>(state)</code>的丢失有时候会造成不可预知的问题，需要尤为注意。</p>
+<h3 id="key属性"><a href="#key属性" class="headerlink" title="key属性"></a>key属性</h3><p>在上面的前后元素树比较过程中，如果某个元素的子元素是动态数组类型的，那么比较的过程可能就要有所区分，比如: 　　</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//注意:</div><div class="line">//li元素是数组生成的，下面只是表示元素树，并不代表实际代码</div><div class="line">//old tree</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>first<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>second<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line">//new tree</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>first<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>second<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>third<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>当React同时迭代比较前后两棵元素树的子元素列表时，性能相对不会太差，因为前两个项都是相同的，新的元素树中有第三个项目，那么React会比较<code>&lt;li&gt;first&lt;/li&gt;</code>树与<code>&lt;li&gt;second&lt;/li&gt;</code>树之后，插入<code>&lt;li&gt;third&lt;/li&gt;</code>树，但是下面这个例子就不同的: 　　</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//注意:</div><div class="line">//li元素是数组生成的，下面只是表示元素树，并不代表实际代码</div><div class="line">//old tree</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line">//new tree</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Connecticut<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>React在比较第一个li就发现了差异(<code>&lt;li&gt;Duke&lt;/li&gt;与&lt;li&gt;Connecticut&lt;/li&gt;</code>)，如果React将第一个li中的内容进行更新，那么你会发现第二个li(<code>&lt;li&gt;Villanova&lt;/li&gt;</code>与<code>&lt;li&gt;Duke&lt;/li&gt;</code>)也需要将li中内容进行更新，并且第三个<code>&lt;li&gt;</code>需要安装新的元素，但事实真的是如此吗？其实不然，我们发现新的元素树和旧的元素树，只有第一项是不同的，后两项其实并没有发生改变，如果React懂得在旧的元素树开始出插入<code>&lt;li&gt;Connecticut&lt;/li&gt;</code>，那么性能会极大的提高，关键问题是React如何进行这种判别，这时React就用到了key属性。</p>
+<p>例如:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//注意:</div><div class="line">//li元素是数组生成的，下面只是表示元素树，并不代表实际代码</div><div class="line">//old tree</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"2015"</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"2016"</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"></div><div class="line">//new tree</div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"2014"</span>&gt;</span>Connecticut<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"2015"</span>&gt;</span>Duke<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">"2016"</span>&gt;</span>Villanova<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>通过key值React比较<code>&lt;li key=&quot;2015&quot;&gt;Duke&lt;/li&gt;</code>与<code>&lt;li key=&quot;2014&quot;&gt;Connecticut&lt;/li&gt;</code>时，会发现key值是不同，表示<code>&lt;li key=&quot;2014&quot;&gt;Connecticut&lt;/li&gt;</code>是新插入的项，因此会在开始出插入<code>&lt;li key=&quot;2014&quot;&gt;Connecticut&lt;/li&gt;</code>,随后分别比较<code>&lt;li key=&quot;2015&quot;&gt;Duke&lt;/li&gt;</code>与<code>&lt;li key=&quot;2016&quot;&gt;Villanova&lt;/li&gt;</code>,发现<code>li</code>项没有发生改变，仅仅只是被移动而已。这种情况下，性能的提升是非常可观的。因此，从上面看key值必须要稳定、可预测的并且是唯一的。不稳定的key(类似于<code>Math.random()</code>函数的结果)可能会产生非常多的组件实例并且DOM节点也会非必要性的重新创建。这将会造成极大的性能损失和组件内state的丢失。<br>　　<br>回到刚开始的问题，如果存在两个key值相同时，会发生什么？比如: 　　</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">    &#123;</div><div class="line">        [1,1,2,2].map((val)=&gt;<span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;val&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span>)</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我们会发现如果存在前后两个相同的key，React会认为这两个元素其实是一个元素，后一个具有相同key值的元素会被忽略。为了验证这个事实，我们可以看下一个例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Demo</span>(<span class="params">props</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;div&gt;&#123;props.value&#125;&lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">class App extends Component &#123;</span></div><div class="line"><span class="regexp">    constructor(props) &#123;</span></div><div class="line"><span class="regexp">        super(props);</span></div><div class="line"><span class="regexp">    &#125;</span></div><div class="line"><span class="regexp">    render() &#123;</span></div><div class="line"><span class="regexp">        return (</span></div><div class="line"><span class="regexp">            &lt;div&gt;</span></div><div class="line"><span class="regexp">                &#123;</span></div><div class="line"><span class="regexp">                    [1, 1, 2, 2].map((val, index) =&gt; &#123;</span></div><div class="line"><span class="regexp">                        return (</span></div><div class="line"><span class="regexp">                            &lt;Demo</span></div><div class="line"><span class="regexp">                                key=&#123;val&#125;</span></div><div class="line"><span class="regexp">                                value=&#123;val + '-' + index&#125;</span></div><div class="line"><span class="regexp">                            /</span>&gt;</div><div class="line">                        )</div><div class="line">                    &#125;)</div><div class="line">                &#125;</div><div class="line">            &lt;<span class="regexp">/div&gt;</span></div><div class="line"><span class="regexp">        )</span></div><div class="line"><span class="regexp">    &#125;</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">ReactDOM.render(&lt;App/</span>&gt;, <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
+<p>我们发现最后的显示效果是这样的:</p>
+<blockquote>
+<p>1-0<br>2-2</p>
+</blockquote>
+<p>到这里我们已经基本明白了key属性在React中的作用，因为key是React内部使用的属性，所以在组件内部是无法获取到key值的，如果你真的需要这个值，就需要换个名字再传一次了。<br>　　<br>其实还有一个现象不知道大家观察到了没有，比如: 　　</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//case1</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;ul&gt;</div><div class="line">            &#123;</div><div class="line">                [</div><div class="line">                    &lt;li key=&#123;<span class="number">1</span>&#125;&gt;<span class="number">1</span>&lt;<span class="regexp">/li&gt;,</span></div><div class="line"><span class="regexp">                    &lt;li key=&#123;2&#125;&gt;2&lt;/</span>li&gt;</div><div class="line">                ]</div><div class="line">            &#125;</div><div class="line">        &lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp">/</span><span class="regexp">/case2</span></div><div class="line"><span class="regexp">function App() &#123;</span></div><div class="line"><span class="regexp">    return (</span></div><div class="line"><span class="regexp">        &lt;ul&gt;</span></div><div class="line"><span class="regexp">            &lt;li&gt;1&lt;/</span>li&gt;</div><div class="line">            &lt;li&gt;<span class="number">2</span>&lt;<span class="regexp">/li&gt;</span></div><div class="line"><span class="regexp">        &lt;/u</span>l&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们会发现，第一种场景是需要传入key值的，第二种就不需要传入key，为什么呢？其实我们可以看一下JSX编译之后的代码: 　　</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//case1</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> React.createElement(<span class="string">'ul'</span>,<span class="literal">null</span>,[</div><div class="line">        React.createElement(<span class="string">'li'</span>,&#123;<span class="attr">key</span>: <span class="number">1</span>&#125;, <span class="string">"1"</span>),</div><div class="line">        React.createElement(<span class="string">'li'</span>,&#123;<span class="attr">key</span>: <span class="number">2</span>&#125;, <span class="string">"2"</span>)</div><div class="line">    ])</div><div class="line">&#125;</div><div class="line"><span class="comment">//case2</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> React.createElement(<span class="string">'ul'</span>,</div><div class="line">        <span class="literal">null</span>,</div><div class="line">        React.createElement(<span class="string">'li'</span>,&#123;<span class="attr">key</span>: <span class="number">1</span>&#125;, <span class="string">"1"</span>),</div><div class="line">        React.createElement(<span class="string">'li'</span>,&#123;<span class="attr">key</span>: <span class="number">2</span>&#125;, <span class="string">"2"</span>)</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们发现第一个场景中，子元素的传入以数组的形式传入第三个参数，但是在第二个场景中，子元素是以参数的形式依次传入的。在第二种场景中，每个元素出现在固定的参数位置上，React就是通过这个位置作为天然的key值去判别的，所以你就不用传入key值的，但是第一种场景下，以数组的类型将全部子元素传入，React就不能通过参数位置的方法去判别，所以就必须你手动地方式去传入key值。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Flandre
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://sleepyyj.github.io/2017/09/09/React中的key/" title="React中的key">https://sleepyyj.github.io/2017/09/09/React中的key/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/07/webpack之babel-loader配置/" rel="next" title="webpack之babel-loader配置">
+                <i class="fa fa-chevron-left"></i> webpack之babel-loader配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/dog.jpg"
+               alt="Flandre" />
+          <p class="site-author-name" itemprop="name">Flandre</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/sleepyyj" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/yang-jian-53-98/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+        <div id="music163player">
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=300 height=86 src="//music.163.com/outchain/player?type=2&id=76881&auto=0&height=66"></iframe>
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性处理-Reconciliation"><span class="nav-number">1.1.</span> <span class="nav-text">一致性处理(Reconciliation)　　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启发式算法"><span class="nav-number">1.2.</span> <span class="nav-text">启发式算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素类型的比较"><span class="nav-number">1.3.</span> <span class="nav-text">元素类型的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key属性"><span class="nav-number">1.4.</span> <span class="nav-text">key属性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Flandre</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">
+      5.8k
+    </span>
+  
+</div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>你是第<b>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      </b>个到访的小伙伴
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>总访问量<b>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </b>次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("AdzqKGrqq45QeOXpC5P8LgCk-gzGzoHsz", "rYbXxXtD14mG5C8mU8RYKn4z");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
