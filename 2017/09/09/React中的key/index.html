@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,React," />
+  <meta name="keywords" content="React,JavaScript," />
 
 
 
@@ -95,19 +95,19 @@
 
 
 
-<meta name="description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在Re">
-<meta name="keywords" content="JavaScript,React">
+<meta name="description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui。但本例中明明改变了state，UI却没有重新render，查了一下发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在React中">
+<meta name="keywords" content="React,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React中的key">
 <meta property="og:url" content="https://sleepyyj.github.io/2017/09/09/React中的key/index.html">
 <meta property="og:site_name" content="Flandre">
-<meta property="og:description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在Re">
+<meta property="og:description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui。但本例中明明改变了state，UI却没有重新render，查了一下发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在React中">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png">
-<meta property="og:updated_time" content="2017-09-09T03:33:32.451Z">
+<meta property="og:updated_time" content="2017-09-12T07:32:12.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React中的key">
-<meta name="twitter:description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在Re">
+<meta name="twitter:description" content="前言前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui。但本例中明明改变了state，UI却没有重新render，查了一下发现和key有关。 大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:  所以我们需要了解一下key值在React中">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png">
 
 
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,484
+                  2,481
                 </span>
               
 
@@ -456,7 +456,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui，但明明改变了state，UI却没有重新render，代码太丑就不贴了。后来发现和key有关。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间做一个功能，是基于React的，大家的都知道只要props和state发生变化，React会调用render重新渲染ui。但本例中明明改变了state，UI却没有重新render，查了一下发现和key有关。</p>
 <p>大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:</p>
 <p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png" alt="warning" title="warning"></p>
 <p>所以我们需要了解一下key值在React中起到了什么作用，在这之前我们先出一个小题目: 　　</p>
@@ -528,9 +528,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
             <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
         </div>
       
