@@ -98,9 +98,9 @@
         
         <tags>
             
-            <tag> JavaScript </tag>
-            
             <tag> React </tag>
+            
+            <tag> JavaScript </tag>
             
         </tags>
         
@@ -250,6 +250,30 @@
         <tags>
             
             <tag> Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[There is no getter for property named 'id' in 'class java.lang.Integer']]></title>
+      <url>/2017/01/12/There-is-no-getter-for-property-named-id-in-class-java-lang-Integer/</url>
+      <content type="html"><![CDATA[<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findUserById"</span> <span class="attr">parameterType</span>=<span class="string">"int"</span> <span class="attr">resultType</span>=<span class="string">"User"</span>&gt;</span></div><div class="line">    select * from user1 </div><div class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"id != null and id != ''"</span>&gt;</span></div><div class="line">            and id=#&#123;id&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在测试时报错：There is no getter for property named ‘id’ in ‘class java.lang.Integer’</p>
+<p>问题分析：Mybatis默认采用ONGL解析参数，所以会自动采用对象树的形式取integer.id值，引起报错。</p>
+<p>解决方法：  public User findUserById(@Param(“id”)int id);说明参数值。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> Mybatis </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Mybatis </tag>
             
         </tags>
         
