@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="Flandre">
 <meta property="og:description" content="前言前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。 babel-loader配置babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-07T12:59:09.067Z">
+<meta property="og:updated_time" content="2017-09-13T09:56:03.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack之babel-loader配置">
 <meta name="twitter:description" content="前言前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。 babel-loader配置babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，">
@@ -417,7 +417,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  968
+                  984
                 </span>
               
 
@@ -457,7 +457,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前端知识体系真滴庞大，光打包工具就有好多，gulp、grunt、webpack、Yeoman、bower等等。前段时间看到一个stage属性，查了下资料，这里顺便写一写babel-loader相关的知识。</p>
 <h3 id="babel-loader配置"><a href="#babel-loader配置" class="headerlink" title="babel-loader配置"></a>babel-loader配置</h3><p>babel是一个转换器，可以把JSX和ES6代码转换成普通js文件和es5代码，因为现在主流的JavaScript对es6的支持并不高，而且没有浏览器支持jsx，所以如果你想使用es6的一颗赛艇的新特性，babel是必要的。贴段代码吧</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;</div><div class="line">        test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx</div><div class="line">        exclude: /(node_modules|bower_components)/,</div><div class="line">        loader: 'babel', </div><div class="line">        query: &#123;</div><div class="line">            "presets": [</div><div class="line">        "react",</div><div class="line">        "es2015",</div><div class="line">        "stage-1"</div><div class="line">        ],</div><div class="line">            "plugins": ["transform-decorators-legacy"]</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>test：是一个用来匹配jsx的正则表达式<br>exclude：不列入查找范围的文件夹<br>loader：The module to load. “babel” is short for “babel-loader”<br>query：需要转换的范围，也可以写在loader选项babel的后面，如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;</div><div class="line">		test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx</div><div class="line">		exclude: /(node_modules|bower_components)/,</div><div class="line">		loader: 'babel?presets[]=es2015&amp;presets[]=react&amp;presets[]=stage-1', </div><div class="line">		query: &#123;</div><div class="line">      		"plugins": ["transform-decorators-legacy"] //这个插件下面会讲到</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）<br>exclude：屏蔽不需要处理的文件（文件夹）（可选）<br>loader：loader的名称（必须）<br>query：为loaders提供额外的设置选项（可选），也可以写在loader选项babel的后面，如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">  loaders: [</div><div class="line">    &#123;</div><div class="line">		test: /\.jsx?$/, // A regexp to test the require path. accepts either js or jsx</div><div class="line">		exclude: /(node_modules|bower_components)/,</div><div class="line">		loader: 'babel?presets[]=es2015&amp;presets[]=react&amp;presets[]=stage-1', </div><div class="line">		query: &#123;</div><div class="line">      		"plugins": ["transform-decorators-legacy"] //这个插件下面会讲到</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>敲黑板。下面重点讲一下stage</p>
 <h3 id="stage-0"><a href="#stage-0" class="headerlink" title="stage-0"></a>stage-0</h3><p>stage-0包含stage-1, stage-2以及stage-3的所有功能，同时还另外支持如下两个功能插件：</p>
 <ul>
@@ -625,7 +625,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -636,7 +636,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -647,7 +647,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -747,7 +747,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      5.8k
+      6.9k
     </span>
   
 </div>
