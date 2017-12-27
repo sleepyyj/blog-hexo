@@ -1383,6 +1383,592 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/08/25/经验/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Flandre">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flandre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/25/经验/" itemprop="url">经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T11:02:50+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/经验/" itemprop="url" rel="index">
+                    <span itemprop="name">经验</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/25/经验/" class="leancloud_visitors" data-flag-title="经验">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  308
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p>flex-grow的元素会把普通元素的大小压缩，给不想被压缩 的元素设置flex-shrink:0</p>
+</li>
+<li><p>background-attachment:local 不生效的时候加个border-radius:1px</p>
+</li>
+<li><p>FormData 文件的data要放在普通表单data的后面 否则后台无法获取req.body.普通表单值</p>
+</li>
+<li><p>pointer-events: none; 永远不会成为鼠标事件的 target ，但可以指向其后代元素</p>
+</li>
+<li><p>函数提升优先级比变量提升要高，且不会被变量声明覆盖，但是会被变量赋值覆盖，所以你上面的代码实际上是</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">functionfoo()&#123;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"函数声明"</span>);</div><div class="line">&#125;</div><div class="line">varfoo;</div><div class="line"><span class="built_in">console</span>.log(foo);</div><div class="line">foo=<span class="string">"变量"</span>;</div></pre></td></tr></table></figure>
+<p>在最后再加上打印就能看到函数已经被覆盖了。<br>注：初始化变量不会把值也提上上去，只会提升变量的声明。</p>
+<ul>
+<li><p>file.delete() 之前要先关闭流 否则删除失败</p>
+</li>
+<li><p>未明确定义列：不要使用select * ，select具体的字段</p>
+</li>
+<li><p>mongoose.model(“”,Scheme,””) 第一个参数是废的 第三个参数指定 collection 名字<br>mongoose.set(‘pluralization’, false) 阻止mongoose寻找复数形式的collection 比如：person会去找people</p>
+</li>
+<li><p>month: { $month: { $add: [new Date(0), “$beginTime”] } } 用毫秒获取年月日</p>
+</li>
+<li><p>model.update() 要么写回调要么用yield 否则不执行…</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/04/07/oracle-rownum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Flandre">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flandre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/07/oracle-rownum/" itemprop="url">oracle rownum</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T16:39:48+08:00">
+                2017-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Sql/" itemprop="url" rel="index">
+                    <span itemprop="name">Sql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/07/oracle-rownum/" class="leancloud_visitors" data-flag-title="oracle rownum">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  263
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>由于ROWNUM是一个伪列，只有有结果记录时，ROWNUM才有相应数据，因此对它的使用不能向普通列那样使用，否则就会陷入一些“陷阱”当中。<br>不能对ROWNUM使用&gt;（大于1的数值）、&gt;=（大于或等于1的数值）、=（大于或等于1的数值），否则无结果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">selectcount(*)fromcss_bl_viewawhererownum&gt;0;COUNT(*)----------361928</div><div class="line">selectcount(*)fromcss_bl_viewawhererownum&gt;1;COUNT(*)----------0</div></pre></td></tr></table></figure>
+<p>这是因为：<br>1、ROWNUM是伪列，必须要要有返回结果后，每条返回记录就会对应产生一个ROWNUM数值；<br>2、返回结果记录的ROWNUM是从1开始排序的，因此第一条始终是1;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select count(*)  from  (select BL_REF_CDE, rownum rn from css_bl_view) where rn &gt; 1;   COUNT(*)----------361927</div></pre></td></tr></table></figure>
+<p>这样，当查询到第一条记录时，该记录的ROWNUM为1，但条件要求ROWNUM&gt;1，因此不符合，继续查询下一条；因为前面没有符合要求的记录，因此下一条记录过来后，其ROWNUM还是为1，如此循环，就不会产生结果。上述查询可以通过子查询来替代：</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/03/02/statement和resultset/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Flandre">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flandre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/02/statement和resultset/" itemprop="url">statement和resultset</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T15:56:40+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/02/statement和resultset/" class="leancloud_visitors" data-flag-title="statement和resultset">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  630
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1、Connection 是 Statement 的工厂，一个 Connection 可以生产多个 Statement<br>2、Statement、PreparedStatement 是 ResultSet 的工厂，一个 Statement、PreparedStatement 却只能对应一个 ResultSet（他们是一一对应的关系），<br>      但是同一个 Statement 或 PreparedStatement 可以连续执行 executeUpdate、execute 等，只要不返回 ResultSet。</p>
+<p>所以在一段程序里要用多个 ResultSet 的时候，必须在 Connection 中获得多个 Statement，然后一个 Statement 对应一个 ResultSet。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);  </div><div class="line">conn=DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.23.45:1521:ORABI"</span>,<span class="string">"portal"</span>,<span class="string">"portal123"</span>);  </div><div class="line">    </div><div class="line">stmt=conn.createStatement();  </div><div class="line">rs=stmt.executeQuery(sql1);  </div><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;  </div><div class="line"><span class="keyword">while</span>(rs.next())&#123;  </div><div class="line">    ystem.out.println(<span class="string">"i = "</span>+ i++);  </div><div class="line">    rsProc=stmt.executeQuery(sql1)  </div><div class="line">    <span class="keyword">int</span> j =<span class="number">0</span>;  </div><div class="line">    <span class="keyword">while</span>(rsProc.next())&#123;  </div><div class="line">        System.out.println(<span class="string">"j = "</span>+ j++);  </div><div class="line">    &#125;             </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>rs结果集中应该为多条数据，然而rs.next()只能取出集合中的第一条，但是rsProc.next()去记录是正常的。<br> ﻿<br>问题解决的方式：<br>1.新增一个statement对象Statement stmt2=null;<br>2.将rsProc=stmt.executeQuery(sql1);修改如下：<br>   stmt2 = conn.createStatement();<br>   rsProc=stmt2.executeQuery(sql1);<br>3.在finally中添加如下：<br>   if(stmt2!=null){<br>      stmt2.close();<br>   }<br>程序运行就正常了。</p>
+<p>经思考之后，原因如下：<br>statement用于执行静态 SQL 语句并返回它所生成结果的对象。在默认情况下，同一时间每个 Statement 对象只能打开一个 ResultSet 对象(既同一个Statement打开的ResultSet只有一个记录指针)。因此创建SQL statement在执行sql中的流程，如果读取一个 ResultSet 对象与读取另一个交叉，则这两个对象必须是由不同的 Statement 对象生成的。如果存在某个语句的打开的了前 ResultSet 对象，则Statement 接口中的所有执行方法都会隐式关闭它。这里的ResultSet对象是默认的， ResultSet 对象不可更新，仅有一个向前移动的指针。因此，只能迭代它一次，并且只能按从第一行到最后一行的顺序进行。可以生成可滚动和/或可更新的 ResultSet 对象。以下代码片段（其中 con 为有效的 Connection 对象）演示了如何生成可滚动且不受其他更新影响的、可更新的结果集。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Statement stmt = con.createStatement(</div><div class="line">                               ResultSet.TYPE_SCROLL_INSENSITIVE,</div><div class="line">                               ResultSet.CONCUR_UPDATABLE);</div><div class="line">ResultSet rs = stmt.executeQuery(<span class="string">"SELECT a, b FROM TABLE2"</span>);</div></pre></td></tr></table></figure></p>
+<p>修改前的rsProc=stmt.executeQuery(sql1);中stmt并没有重新创建，因此rsProc对象地址没有发生变化。在rsProc循环取记录的之后，对象中的指示记录的指针已经指向结果集尾部，因而结果集rs再次next（）的时候返回的是false，即只取出结果的第一条记录。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/01/12/There-is-no-getter-for-property-named-id-in-class-java-lang-Integer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1605,7 +2191,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1616,7 +2202,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1627,7 +2213,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1711,7 +2297,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      7.0k
+      8.2k
     </span>
   
 </div>
