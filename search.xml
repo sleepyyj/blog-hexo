@@ -54,7 +54,7 @@
 <p>大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:</p>
 <p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png" alt="warning" title="warning"></p>
 <p>所以我们需要了解一下key值在React中起到了什么作用，在这之前我们先出一个小题目: 　　</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;ul&gt;</div><div class="line">            &#123;</div><div class="line">                [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>].map(<span class="function">(<span class="params">val</span>)=&gt;</span>&lt;li key=&#123;val&#125;&gt;&#123;val&#125;&lt;/li&gt;)</div><div class="line">            &#125;</div><div class="line">        &lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">ReactDOM.render(&lt;App/</span>&gt;,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;ul&gt;</div><div class="line">            &#123;</div><div class="line">                [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>].map(<span class="function">(<span class="params">val</span>)=&gt;</span><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;val&#125;</span>&gt;</span>&#123;val&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>)</div><div class="line">            &#125;</div><div class="line">        &lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">ReactDOM.render(&lt;App/</span>&gt;,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
 <p>现在要提问了，上面的例子显示的是: 1,1,2,2还是1,2呢。事实上显示的只有1和2，所以我们不禁要问为什么?</p>
 <h3 id="一致性处理-Reconciliation"><a href="#一致性处理-Reconciliation" class="headerlink" title="一致性处理(Reconciliation)　　"></a>一致性处理(Reconciliation)　　</h3><p>我们知道每当组件的props和state发送改变时，React都会调用render去重新渲染UI，实质上render函数作用就是返回最新的元素树。这里我们要明确一个点: 什么是组件？什么是元素?<br>　　<br>React元素是用来描述UI对象的，JSX的实质就是<code>React.createElement</code>的语法糖，作用就是生成React元素。而React组件是一个方法或者类(Class)，其目的就是接受输入并返回一个ReactElement，当然调用React组件一般采用的也是通过JSX的方法，其本质也是通过React.createElement方式去调用组件的。<br>　　<br>我们之前说过，组件<code>state</code>和<code>props</code>的改变会引起render函数的调用，而render函数会返回新的元素树。我们知道React使得我们并不需要关心更改的内容，只需要将精力集中于数据的变化，React会负责前后UI更新。这时候React就面临一个问题，如果对比当前的元素树与之前的元素树，从而找到最优的方法(或者说是步骤最少的方法)将一颗树转化成另一棵树，从而去更新真实的DOM元素。目前存在大量的方法可以将一棵树转化成另一棵树，但它们的时间复杂度基本都是O(n3),这么庞大的时间数量级我们是不能接受的，试想如果我们的组件返回的元素树中含有100个元素，那么一次一致性比较就要达到1000000的数量级，这显然是低效的，不可接受的。这时React就采用了启发式的算法。 　　</p>
 <h3 id="启发式算法"><a href="#启发式算法" class="headerlink" title="启发式算法"></a>启发式算法</h3><p>了解一下什么是启发式算法：</p>
@@ -371,6 +371,116 @@
         <tags>
             
             <tag> Mybatis </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[SQL优化]]></title>
+      <url>/2016/12/28/SQL%E4%BC%98%E5%8C%96/</url>
+      <content type="html"><![CDATA[<h3 id="SQL语句优化"><a href="#SQL语句优化" class="headerlink" title="SQL语句优化"></a>SQL语句优化</h3><ul>
+<li><p>应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：<br>select id from t where num is null<br>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：<br>select id from t where num=0</p>
+</li>
+<li><p>避免Select <em><br>Selcet中每少提取一个字段，数据的提取速度就会有相应的提升。提升的速度还要看您舍弃的字段的大小来判断。应避免使用Select </em>。</p>
+</li>
+<li><p>表关联顺序<br>Oracle的解析器按照从右到左的顺序处理from子句中的表名，from子句中写在最后的表(基础表 driving table)将被最先处理，在from子句中包含多个表的情况下,你必须选择记录条数最少的表作为基础表。如果有3个以上的表连接查询, 那就需要选择交叉表(intersection table)作为基础表, 交叉表是指那个被其他表所引用的表。</p>
+</li>
+<li><p>避免全表扫描<br>Where中少用NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT EXISTS、NOT IN、NOT LIKE，它们会引起全表扫描。</p>
+</li>
+<li><p>用Where子句替代having子句<br>避免使用having子句，having只会在检索出所有记录之后才对结果集进行过滤。</p>
+</li>
+<li><p>exists代替in<br>Oracle中In子查询返回的结果不能超过1000条，使用exists为替代方案。</p>
+</li>
+<li><p>WHERE子句中的顺序<br>Oracle采用自下而上的顺序解析Where子句，根据这个原理,表之间的连接必须写在其他Where条件之前，那些可以过滤掉最大数量记录的条件写在Where子句的末尾。</p>
+</li>
+</ul>
+]]></content>
+      
+        <categories>
+            
+            <category> SQL </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> SQL </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[索引的工作原理及其种类]]></title>
+      <url>/2016/12/28/%E7%B4%A2%E5%BC%95%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E7%A7%8D%E7%B1%BB/</url>
+      <content type="html"><![CDATA[<h3 id="数据库索引"><a href="#数据库索引" class="headerlink" title="数据库索引"></a>数据库索引</h3><p>是数据库管理系统中一个排序的数据结构，以协助快速查询、更新数据库表中数据。索引的实现通常使用B树及其变种B+树。</p>
+<p>在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。</p>
+<p>为表设置索引要付出代价的：一是增加了数据库的存储空间，二是在插入和修改数据时要花费较多的时间(因为索引也要随之变动)。</p>
+<p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/suoyin.png" alt="suoyin" title="suoyin"></p>
+<p>图展示了一种可能的索引方式。左边是数据表，一共有两列七条记录，最左边的是数据记录的物理地址（注意逻辑上相邻的记录在磁盘上也并不是一定物理相邻的）。为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针，这样就可以运用二叉查找在O(log2n)的复杂度内获取到相应数据。</p>
+<p>创建索引可以大大提高系统的性能。</p>
+<ul>
+<li><p>通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。</p>
+</li>
+<li><p>可以大大加快数据的检索速度，这也是创建索引的最主要的原因。</p>
+</li>
+<li><p>可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。</p>
+</li>
+<li><p>在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间。</p>
+</li>
+<li><p>通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。</p>
+</li>
+</ul>
+<p>也许会有人要问：增加索引有如此多的优点，为什么不对表中的每一个列创建一个索引呢？因为，增加索引也有许多不利的方面。</p>
+<ul>
+<li><p>创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。</p>
+</li>
+<li><p>索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间，如果要建立聚簇索引，那么需要的空间就会更大。</p>
+</li>
+<li><p>当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。</p>
+</li>
+</ul>
+<p>索引是建立在数据库表中的某些列的上面。在创建索引的时候，应该考虑在哪些列上可以创建索引，在哪些列上不能创建索引。一般来说，应该在这些列上创建索引：在经常需要搜索的列上，可以加快搜索的速度；在作为主键的列上，强制该列的唯一性和组织表中数据的排列结构；在经常用在连接的列上，这些列主要是一些外键，可以加快连接的速度；在经常需要根据范围进行搜索的列上创建索引，因为索引已经排序，其指定的范围是连续的；在经常需要排序的列上创建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间；在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。</p>
+<p>同样，对于有些列不应该创建索引。一般来说，不应该创建索引的的这些列具有下列特点：</p>
+<ul>
+<li><p>对于那些在查询中很少使用或者参考的列不应该创建索引。这是因为，既然这些列很少使用到，因此有索引或者无索引，并不能提高查询速度。相反，由于增加了索引，反而降低了系统的维护速度和增大了空间需求。</p>
+</li>
+<li><p>对于那些只有很少数据值的列也不应该增加索引。这是因为，由于这些列的取值很少，例如人事表的性别列，在查询的结果中，结果集的数据行占了表中数据行的很大比例，即需要在表中搜索的数据行的比例很大。增加索引，并不能明显加快检索速度。</p>
+</li>
+<li><p>对于那些定义为text, image和bit数据类型的列不应该增加索引。这是因为，这些列的数据量要么相当大，要么取值很少。</p>
+</li>
+<li><p>当修改性能远远大于检索性能时，不应该创建索引。这是因为，修改性能和检索性能是互相矛盾的。当增加索引时，会提高检索性能，但是会降低修改性能。当减少索引时，会提高修改性能，降低检索性能。因此，当修改性能远远大于检索性能时，不应该创建索引。</p>
+</li>
+</ul>
+<p>根据数据库的功能，可以在数据库设计器中创建三种索引：唯一索引、主键索引和聚集索引。</p>
+<h3 id="唯一索引"><a href="#唯一索引" class="headerlink" title="唯一索引"></a>唯一索引</h3><p>唯一索引是不允许其中任何两行具有相同索引值的索引。</p>
+<p>当现有数据中存在重复的键值时，大多数数据库不允许将新创建的唯一索引与表一起保存。数据库还可能防止添加将在表中创建重复键值的新数据。例如，如果在employee表中职员的姓(lname)上创建了唯一索引，则任何两个员工都不能同姓。 </p>
+<h3 id="主键索引"><a href="#主键索引" class="headerlink" title="主键索引"></a>主键索引</h3><p>数据库表经常有一列或列组合，其值唯一标识表中的每一行。该列称为表的主键。 在数据库关系图中为表定义主键将自动创建主键索引，主键索引是唯一索引的特定类型。该索引要求主键中的每个值都唯一。当在查询中使用主键索引时，它还允许对数据的快速访问。 </p>
+<p>###聚集索引<br>在聚集索引中，表中行的物理顺序与键值的逻辑（索引）顺序相同。一个表只能包含一个聚集索引。</p>
+<p>如果某索引不是聚集索引，则表中行的物理顺序与键值的逻辑顺序不匹配。与非聚集索引相比，聚集索引通常提供更快的数据访问速度。</p>
+<h3 id="局部性原理与磁盘预读"><a href="#局部性原理与磁盘预读" class="headerlink" title="局部性原理与磁盘预读"></a>局部性原理与磁盘预读</h3><p>由于存储介质的特性，磁盘本身存取就比主存慢很多，再加上机械运动耗费，磁盘的存取速度往往是主存的几百分分之一，因此为了提高效率，要尽量减少磁盘I/O。为了达到这个目的，磁盘往往不是严格按需读取，而是每次都会预读，即使只需要一个字节，磁盘也会从这个位置开始，顺序向后读取一定长度的数据放入内存。这样做的理论依据是计算机科学中著名的局部性原理：当一个数据被用到时，其附近的数据也通常会马上被使用。程序运行期间所需要的数据通常比较集中。</p>
+<p>由于磁盘顺序读取的效率很高（不需要寻道时间，只需很少的旋转时间），因此对于具有局部性的程序来说，预读可以提高I/O效率。</p>
+<p>预读的长度一般为页（page）的整倍数。页是计算机管理存储器的逻辑块，硬件及操作系统往往将主存和磁盘存储区分割为连续的大小相等的块，每个存储块称为一页（在许多操作系统中，页得大小通常为4k），主存和磁盘以页为单位交换数据。当程序要读取的数据不在主存中时，会触发一个缺页异常，此时系统会向磁盘发出读盘信号，磁盘会找到数据的起始位置并向后连续读取一页或几页载入内存中，然后异常返回，程序继续运行。</p>
+<h3 id="B-Tree索引的性能分析"><a href="#B-Tree索引的性能分析" class="headerlink" title="B-/+Tree索引的性能分析"></a>B-/+Tree索引的性能分析</h3><p>到这里终于可以分析B-/+Tree索引的性能了。</p>
+<p>上文说过一般使用磁盘I/O次数评价索引结构的优劣。先从B-Tree分析，根据B-Tree的定义，可知检索一次最多需要访问h个节点。数据库系统的设计者巧妙利用了磁盘预读原理，将一个节点的大小设为等于一个页，这样每个节点只需要一次I/O就可以完全载入。为了达到这个目的，在实际实现B-Tree还需要使用如下技巧：</p>
+<p>每次新建节点时，直接申请一个页的空间，这样就保证一个节点物理上也存储在一个页里，加之计算机存储分配都是按页对齐的，就实现了一个node只需一次I/O。</p>
+<p>B-Tree中一次检索最多需要h-1次I/O（根节点常驻内存），渐进复杂度为O(h)=O(logdN)。一般实际应用中，出度d是非常大的数字，通常超过100，因此h非常小（通常不超过3）。</p>
+<p>而红黑树这种结构，h明显要深的多。由于逻辑上很近的节点（父子）物理上可能很远，无法利用局部性，所以红黑树的I/O渐进复杂度也为O(h)，效率明显比B-Tree差很多。</p>
+<p>综上所述，用B-Tree作为索引结构效率是非常高的。</p>
+]]></content>
+      
+        <categories>
+            
+            <category> SQL </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> SQL </tag>
             
         </tags>
         
