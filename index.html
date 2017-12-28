@@ -319,6 +319,202 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/10/11/JavaScript严格模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Flandre">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/dog.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Flandre">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/11/JavaScript严格模式/" itemprop="url">JavaScript严格模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-11T16:22:54+08:00">
+                2017-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/11/JavaScript严格模式/" class="leancloud_visitors" data-flag-title="JavaScript严格模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  215
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>不允许使用with</li>
+<li>给未声明的变量赋值会报错，而不是创建一个全局变量</li>
+<li>访问不到eval中的变量，eval作为一个单独的作用域</li>
+<li>函数中的特殊对象arguments是静态副本，而不像非严格模式一样，修改arguments或修改变量会相互影响</li>
+<li>删除configurable=false的属性报错，而不是忽略</li>
+<li>禁止八进制字面量，如010</li>
+<li>eval，arguments变为关键字，不可作为变量名、函数名</li>
+<li>一般函数调用时（不是对象的方法调用，也不使用bind/apply/call）this指向null，而不是window</li>
+<li>若使用apply/call，当传入null或undefined时，this将指向null或undefined，而不是window</li>
+<li>试图修改不可写属性（writable=false），在不可扩展的对象上添加属性报TypeError，而不是忽略</li>
+<li>arguments.caller、arguments.callee被禁用</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2017/09/19/postMessage解决跨域、跨窗口消息传递/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -664,7 +860,7 @@
 <p>大家在使用React的过程中，当组件的子元素是一系列类型相同元素时，就必须添加一个属性key,否则React将给出一个warning:</p>
 <p><img src="https://raw.githubusercontent.com/sleepyyj/learngit/master/images/warning.png" alt="warning" title="warning"></p>
 <p>所以我们需要了解一下key值在React中起到了什么作用，在这之前我们先出一个小题目: 　　</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;ul&gt;</div><div class="line">            &#123;</div><div class="line">                [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>].map(<span class="function">(<span class="params">val</span>)=&gt;</span><span class="xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;val&#125;</span>&gt;</span>&#123;val&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>)</div><div class="line">            &#125;</div><div class="line">        &lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">ReactDOM.render(&lt;App/</span>&gt;,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        &lt;ul&gt;</div><div class="line">            &#123;</div><div class="line">                [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>].map(<span class="function">(<span class="params">val</span>)=&gt;</span>&lt;li key=&#123;val&#125;&gt;&#123;val&#125;&lt;/li&gt;)</div><div class="line">            &#125;</div><div class="line">        &lt;<span class="regexp">/ul&gt;</span></div><div class="line"><span class="regexp">    )</span></div><div class="line"><span class="regexp">&#125;</span></div><div class="line"><span class="regexp"></span></div><div class="line"><span class="regexp">ReactDOM.render(&lt;App/</span>&gt;,<span class="built_in">document</span>.getElementById(<span class="string">'root'</span>))</div></pre></td></tr></table></figure>
 <p>现在要提问了，上面的例子显示的是: 1,1,2,2还是1,2呢。事实上显示的只有1和2，所以我们不禁要问为什么?</p>
 <h3 id="一致性处理-Reconciliation"><a href="#一致性处理-Reconciliation" class="headerlink" title="一致性处理(Reconciliation)　　"></a>一致性处理(Reconciliation)　　</h3><p>我们知道每当组件的props和state发送改变时，React都会调用render去重新渲染UI，实质上render函数作用就是返回最新的元素树。这里我们要明确一个点: 什么是组件？什么是元素?<br>　　<br>React元素是用来描述UI对象的，JSX的实质就是<code>React.createElement</code>的语法糖，作用就是生成React元素。而React组件是一个方法或者类(Class)，其目的就是接受输入并返回一个ReactElement，当然调用React组件一般采用的也是通过JSX的方法，其本质也是通过React.createElement方式去调用组件的。<br>　　<br>我们之前说过，组件<code>state</code>和<code>props</code>的改变会引起render函数的调用，而render函数会返回新的元素树。我们知道React使得我们并不需要关心更改的内容，只需要将精力集中于数据的变化，React会负责前后UI更新。这时候React就面临一个问题，如果对比当前的元素树与之前的元素树，从而找到最优的方法(或者说是步骤最少的方法)将一颗树转化成另一棵树，从而去更新真实的DOM元素。目前存在大量的方法可以将一棵树转化成另一棵树，但它们的时间复杂度基本都是O(n3),这么庞大的时间数量级我们是不能接受的，试想如果我们的组件返回的元素树中含有100个元素，那么一次一致性比较就要达到1000000的数量级，这显然是低效的，不可接受的。这时React就采用了启发式的算法。 　　</p>
 <h3 id="启发式算法"><a href="#启发式算法" class="headerlink" title="启发式算法"></a>启发式算法</h3><p>了解一下什么是启发式算法：</p>
@@ -2143,205 +2339,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://sleepyyj.github.io/2016/12/28/SQL优化/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Flandre">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/dog.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Flandre">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/28/SQL优化/" itemprop="url">SQL优化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-28T16:32:21+08:00">
-                2016-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL/" itemprop="url" rel="index">
-                    <span itemprop="name">SQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/12/28/SQL优化/" class="leancloud_visitors" data-flag-title="SQL优化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  420
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="SQL语句优化"><a href="#SQL语句优化" class="headerlink" title="SQL语句优化"></a>SQL语句优化</h3><ul>
-<li><p>应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描，如：<br>select id from t where num is null<br>可以在num上设置默认值0，确保表中num列没有null值，然后这样查询：<br>select id from t where num=0</p>
-</li>
-<li><p>避免Select <em><br>Selcet中每少提取一个字段，数据的提取速度就会有相应的提升。提升的速度还要看您舍弃的字段的大小来判断。应避免使用Select </em>。</p>
-</li>
-<li><p>表关联顺序<br>Oracle的解析器按照从右到左的顺序处理from子句中的表名，from子句中写在最后的表(基础表 driving table)将被最先处理，在from子句中包含多个表的情况下,你必须选择记录条数最少的表作为基础表。如果有3个以上的表连接查询, 那就需要选择交叉表(intersection table)作为基础表, 交叉表是指那个被其他表所引用的表。</p>
-</li>
-<li><p>避免全表扫描<br>Where中少用NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT EXISTS、NOT IN、NOT LIKE，它们会引起全表扫描。</p>
-</li>
-<li><p>用Where子句替代having子句<br>避免使用having子句，having只会在检索出所有记录之后才对结果集进行过滤。</p>
-</li>
-<li><p>exists代替in<br>Oracle中In子查询返回的结果不能超过1000条，使用exists为替代方案。</p>
-</li>
-<li><p>WHERE子句中的顺序<br>Oracle采用自下而上的顺序解析Where子句，根据这个原理,表之间的连接必须写在其他Where条件之前，那些可以过滤掉最大数量记录的条件写在Where子句的末尾。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2394,7 +2391,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2500,7 +2497,7 @@
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
     <span title="Site words total count">
-      11.1k
+      11.3k
     </span>
   
 </div>
